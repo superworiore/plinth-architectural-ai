@@ -1,0 +1,7 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.0, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\Sauranahmed Mansuri\Downloads\plinth-architectural-ai-main\backend
+plugins: anyio-4.15.1
+collected 9 items
+
+tests\test_compliance.py 

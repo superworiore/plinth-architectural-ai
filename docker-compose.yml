@@ -1,0 +1,58 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# PLINTH — Docker Compose
+# For local development with PostgreSQL (mirrors Supabase locally)
+# ─────────────────────────────────────────────────────────────────────────────
+# Usage:
+#   docker compose up -d          # Start all services
+#   docker compose logs -f backend # Follow backend logs
+#   docker compose down -v         # Stop and remove volumes
+# ─────────────────────────────────────────────────────────────────────────────
+
+services:
+
+  # ── PostgreSQL — local dev DB (mirrors Supabase PostgreSQL 15) ────────────
+  db:
+    image: postgres:15-alpine
+    container_name: plinth_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: plinth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: localdevpassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - plinth_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d plinth"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── FastAPI Backend ───────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: plinth_backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DEBUG: "true"
+      DATABASE_URL: "postgresql://postgres:localdevpassword@db:5432/plinth"
+      DATABASE_URL_DIRECT: "postgresql://postgres:localdevpassword@db:5432/plinth"
+      JWT_SECRET: "docker-local-dev-secret-change-in-prod"
+      ALLOWED_ORIGINS: "http://localhost:5173,http://127.0.0.1:5173"
+      SEED_PASSWORD: "demo1234"
+    ports:
+      - "8000:8000"
+    volumes:
+      - plinth_uploads:/app/uploads
+
+volumes:
+  plinth_pgdata:
+    name: plinth_pgdata
+  plinth_uploads:
+    name: plinth_uploads

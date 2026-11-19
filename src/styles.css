@@ -1,0 +1,337 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * PLINTH design system — merged.
+ * Landing page: architectural, editorial, monochrome (paper/ink/graphite).
+ * Dashboard: material-inspired with oxide/steel/moss accents, sharp corners.
+ */
+
+@theme inline {
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 3px;
+  --radius-xl: 4px;
+  --radius-2xl: 6px;
+  --radius-3xl: 8px;
+  --radius-4xl: 10px;
+
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* material palette */
+  --color-paper: var(--paper);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-graphite: var(--graphite);
+  --color-mist: var(--mist);
+  --color-hairline: var(--hairline);
+  --color-brass: var(--brass);
+  --color-brass-soft: var(--brass-soft);
+  --color-limestone: var(--limestone);
+  --color-concrete: var(--concrete);
+  --color-oxide: var(--oxide);
+  --color-steel: var(--steel);
+  --color-moss: var(--moss);
+  --color-rule: var(--rule);
+
+  --color-chart-1: var(--oxide);
+  --color-chart-2: var(--steel);
+  --color-chart-3: var(--graphite);
+  --color-chart-4: var(--moss);
+  --color-chart-5: var(--concrete);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 2px;
+
+  /* Landing page palette */
+  --paper: oklch(0.972 0.006 85);
+  --ink: oklch(0.205 0.006 65);
+  --ink-foreground: oklch(0.95 0.006 85);
+  --graphite: oklch(0.44 0.008 70);
+  --mist: oklch(0.958 0.005 85);
+  --hairline: oklch(0.875 0.008 82);
+  --brass: oklch(0.705 0.072 76);
+  --brass-soft: oklch(0.86 0.038 82);
+
+  /* Dashboard palette */
+  --limestone: oklch(0.938 0.008 84);
+  --concrete: oklch(0.855 0.008 80);
+  --oxide: oklch(0.53 0.128 44);
+  --steel: oklch(0.55 0.045 236);
+  --moss: oklch(0.5 0.06 145);
+  --rule: oklch(0.875 0.008 82);
+
+  --background: var(--paper);
+  --foreground: oklch(0.215 0.006 65);
+  --card: oklch(0.988 0.004 85);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.992 0.003 85);
+  --popover-foreground: var(--foreground);
+  --primary: var(--ink);
+  --primary-foreground: var(--ink-foreground);
+  --secondary: var(--limestone);
+  --secondary-foreground: var(--ink);
+  --muted: var(--limestone);
+  --muted-foreground: oklch(0.52 0.009 72);
+  --accent: var(--oxide);
+  --accent-foreground: oklch(0.98 0.005 85);
+  --destructive: oklch(0.52 0.17 27);
+  --destructive-foreground: oklch(0.98 0.005 85);
+  --border: var(--rule);
+  --input: var(--rule);
+  --ring: oklch(0.62 0.03 70);
+
+  --sidebar: oklch(0.951 0.007 84);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: var(--ink-foreground);
+  --sidebar-accent: oklch(0.915 0.008 82);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: var(--rule);
+  --sidebar-ring: var(--ring);
+
+  --shadow-soft: 0 1px 2px oklch(0.165 0.012 265 / 0.05),
+    0 24px 60px -32px oklch(0.165 0.012 265 / 0.18);
+  --shadow-lift: 0 2px 4px oklch(0.165 0.012 265 / 0.05),
+    0 48px 120px -48px oklch(0.165 0.012 265 / 0.3);
+}
+
+
+.dark {
+  --paper: oklch(0.19 0.005 65);
+  --limestone: oklch(0.245 0.006 65);
+  --concrete: oklch(0.32 0.006 65);
+  --graphite: oklch(0.62 0.008 70);
+  --ink: oklch(0.93 0.005 85);
+  --ink-foreground: oklch(0.17 0.005 65);
+  --rule: oklch(1 0 0 / 12%);
+
+  --background: oklch(0.165 0.005 65);
+  --foreground: oklch(0.93 0.005 85);
+  --card: oklch(0.205 0.006 65);
+  --card-foreground: var(--foreground);
+  --popover: oklch(0.21 0.006 65);
+  --popover-foreground: var(--foreground);
+  --primary: oklch(0.93 0.005 85);
+  --primary-foreground: oklch(0.18 0.005 65);
+  --secondary: oklch(0.245 0.006 65);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.245 0.006 65);
+  --muted-foreground: oklch(0.68 0.008 72);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+  --sidebar: oklch(0.19 0.005 65);
+  --sidebar-foreground: var(--foreground);
+  --sidebar-accent: oklch(0.25 0.006 65);
+  --sidebar-accent-foreground: var(--foreground);
+  --sidebar-border: oklch(1 0 0 / 12%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--oxide) 22%, transparent);
+  }
+
+  /* Lenis smooth-scroll requires these on html */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  html.lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  html.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+}
+
+/* ── Landing page utilities ── */
+
+/* Editorial display type */
+@utility display {
+  font-weight: 500;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+@utility label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--graphite);
+  font-weight: 500;
+}
+
+@utility glass {
+  background: color-mix(in oklab, var(--paper) 62%, transparent);
+  backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid color-mix(in oklab, var(--paper) 70%, transparent);
+  box-shadow: var(--shadow-soft);
+}
+
+@utility glass-dark {
+  background: oklch(0.16 0.004 285 / 0.42);
+  backdrop-filter: blur(24px) saturate(150%);
+  border: 1px solid oklch(1 0 0 / 0.14);
+}
+
+@utility soft {
+  box-shadow: var(--shadow-soft);
+}
+
+@utility lift {
+  box-shadow: var(--shadow-lift);
+}
+
+@utility grain {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Reveal primitive: blur + rise, driven by data-shown */
+@utility reveal {
+  opacity: 0;
+  filter: blur(14px);
+  transform: translate3d(0, 28px, 0);
+  transition:
+    opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+  &[data-shown="true"] {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@utility hairline-x {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--hairline) 12%,
+    var(--hairline) 88%,
+    transparent
+  );
+}
+
+/* ── Dashboard utilities ── */
+
+/* Technical label: small caps-ish mono metadata used across the dashboard */
+@utility label-tech {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* Architectural drafting grid */
+@utility grid-paper {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+@utility grid-paper-fine {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 4%, transparent) 1px, transparent 1px);
+  background-size: 8px 8px;
+}
+
+/* Hairline framed surface — replaces rounded/shadowed cards */
+@utility panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+}
+
+@utility rule-x {
+  border-top: 1px solid var(--border);
+}
+
+@keyframes plinth-draw {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@utility draw-line {
+  stroke-dasharray: 1200;
+  animation: plinth-draw 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}

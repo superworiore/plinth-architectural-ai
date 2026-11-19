@@ -1,0 +1,74 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Node
+node_modules
+dist
+dist-ssr
+.output
+.vinxi
+.tanstack/**
+.nitro
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ── Frontend environment files (contain secrets) ───────────────────────────
+.env
+.env.local
+.env.production
+.env.staging
+
+# ── Backend environment & database ─────────────────────────────────────────
+backend/.env
+backend/*.env
+backend/plinth.db          # SQLite dev database — never commit
+backend/uploads/*          # Uploaded files — use S3/Supabase Storage in prod
+!backend/uploads/.gitkeep
+
+# Python
+backend/__pycache__/
+backend/**/__pycache__/
+backend/*.pyc
+backend/**/*.pyc
+backend/venv/
+backend/.venv/
+backend/migrations/__pycache__/
+backend/migrations/versions/__pycache__/
+
+# PLINTH local files
+.venv-ml/
+.ipynb_checkpoints/
+.backup_master/
+.backup_milestone/
+_backups/
+plinth.db
+*.db-journal
+runs/
+api_response.json
+
+# Python and ML artifacts
+__pycache__/
+*.pyc
+.pytest_cache/
+*.pt
+*.pth
+*.ckpt
