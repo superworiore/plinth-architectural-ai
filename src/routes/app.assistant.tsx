@@ -5,8 +5,9 @@ import { Send, Bot, User, Sparkles, Copy, Check, RotateCcw, ArrowUp } from "luci
 import { FloorPlan, RoomData } from "@/components/plinth/dashboard/floor-plan";
 import { rooms as initialRooms } from "@/lib/plinth-data";
 import { ai, projects } from "@/lib/api";
-import { useCreateCostItem, useProjects } from "@/hooks/use-api";
+import { useCreateCostItem, useProjects, useFloors } from "@/hooks/use-api";
 import { cn } from "@/lib/utils";
+import { sqmToSqft, estimateRoomAreaSqm } from "@/lib/geometry-utils";
 
 export const Route = createFileRoute("/app/assistant")({
   head: () => ({
@@ -112,7 +113,30 @@ function Assistant() {
 
   const { data: projectsData } = useProjects();
   const projectId = projectsData?.projects?.[0]?.id ?? "";
+  const { data: floorsData } = useFloors(projectId);
   const createCostMutation = useCreateCostItem(projectId);
+
+  useEffect(() => {
+    const floors = floorsData?.floors ?? [];
+    const activeFloor = floors.find((f) => f.level_number === 0) ?? floors[0];
+    if (activeFloor?.rooms?.length) {
+      const mapped = activeFloor.rooms.map((r, i): RoomData => {
+        const geom = (r.geometry as Record<string, unknown> | null | undefined) ?? {};
+        const col = i % 3;
+        const row = Math.floor(i / 3);
+        const x = typeof geom["x"] === "number" ? (geom["x"] as number) : 4 + col * 22;
+        const y = typeof geom["y"] === "number" ? (geom["y"] as number) : 4 + row * 15;
+        const w = typeof geom["w"] === "number" ? (geom["w"] as number) : 18;
+        const h = typeof geom["h"] === "number" ? (geom["h"] as number) : 13;
+        const orientation = typeof geom["orientation"] === "string" ? (geom["orientation"] as string) : "NE";
+        const area_sqm = r.area_sqm != null ? r.area_sqm : estimateRoomAreaSqm(w, h).areaSqm;
+        const area = sqmToSqft(area_sqm);
+        return { id: r.id, name: r.name, type: r.type, area, area_sqm, x, y, w, h, orientation };
+      });
+      setRoomList(mapped);
+      setRoom(mapped[0]?.id ?? "R-01");
+    }
+  }, [floorsData]);
 
   const [messages, setMessages] = useState<Message[]>([
     {

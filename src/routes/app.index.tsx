@@ -211,4 +211,39 @@ function Overview() {
                     <div className="min-w-0">
                       <p className="text-[13px]">{a.action}</p>
                       <p className="label-tech mt-1">
-                        {a.user_name ?? "User"} · {a.user_role?.replace("_", " ") ??
+                        {a.user_name ?? "User"} · {a.user_role?.replace("_", " ") ?? "Team"}
+                      </p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+
+            <Panel title="Cost distribution" meta="By category">
+              <ul className="space-y-4">
+                {(costsData?.summary?.by_category ?? [
+                  { category: "Superstructure", percent: 29 },
+                  { category: "Interiors", percent: 25 },
+                  { category: "Envelope", percent: 17 },
+                  { category: "Services", percent: 12 },
+                  { category: "Substructure", percent: 11 },
+                  { category: "Landscape", percent: 6 },
+                ]).map((c) => (
+                  <li key={c.category}>
+                    <div className="flex items-baseline justify-between">
+                      <span className="text-[13px]">{c.category}</span>
+                      <span className="font-mono text-[11px] text-muted-foreground">
+                        {c.percent}%
+                      </span>
+                    </div>
+                    <div className="mt-2">
+                      <Bar value={c.percent / 100} tone="ink" />
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
+          </div>
+    </div>
+  );
+}
